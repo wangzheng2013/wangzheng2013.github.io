@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>无标题文档</title>
+<link rel="stylesheet" href="../style/home.css" />
+<style>
+body {
+	background-image: url(../img/blueback.jpg);
+}
+.STYLE3 a:link {
+	text-decoration: none;
+	color: #000000;
+}
+.STYLE3 a:visited {
+	text-decoration: none;
+	color: #000000;
+}
+</style>
+<script src="../scripts/home.js"></script>
+<script type="text/JavaScript">
+var index = 1;
+function changeLog()
+{
+index += 1;
+var t = "log"+ index + ".html";
+if(index > 1)
+	alert("没有下一篇！");
+else
+	window.location.href= t;
+}
+</script>
+</head>
+
+<body>
+<div id="table">
+	<div id="head">
+		<ul id="tul">
+    		<li id="blk1" class="block" onmouseover="InBlk('blk1')" onmouseout="OutBlk('blk1')"><a href="../index.html">Homepage</a></li>
+    		<li id="blk2" class="block" onmouseover="InBlk('blk2')" onmouseout="OutBlk('blk2')"><a href="../log/log1.html">Log</a></li>
+    		<li id="blk3" class="block" onmouseover="InBlk('blk3')" onmouseout="OutBlk('blk3')"><a href="../summer/hw1/hw1.html">Homework</a></li>
+			<li id="blk4" class="block" onmouseover="InBlk('blk4')" onmouseout="OutBlk('blk4')"><a href="../aboutme.html">Aboutme</a></li>
+		</ul>
+	</div>
+  <div id="end"><img src="../img/forthedream.png" height="30px"></div>
+</div>
+
+<div id="img"><img src="../img/shanshui.jpg" width="95%" height="200" /></div>
+<table id="mtab" border="0" cellspacing="1" cellpadding="0">
+  <tr>
+    <td id="logleft" valign="top"><p align="left" class="STYLE1">日志分享</p>
+        <p class="STYLE3">July 7th</p>
+      <p class="STYLE3"><a href="../log/log1.html">1、web前端课程初体验</a></p></td>
+    <td class="right" valign="top"><p class="logtitle">Web前端课程初体验</p>
+        <p class="STYLE6">&nbsp;&nbsp;&nbsp;&nbsp;7月6日，我们开始了小学期web前端课程的学习。</p>
+        <p class="STYLE6">  &nbsp;&nbsp;&nbsp;&nbsp;之前我是有上过一门叫做网页设计制作的课程，课程主要教授的是html的制作还少量css知识，所以我还算是有一点基础吧。而听说百度的工程师要来讲web前端开发，我很欣喜，想看看我们自己编的网页和大公司的写作有什么不同。而且之前有参加过一个项目，主要也是写前端，把我搞得要死要活，所以我更得学习点高级的技巧来拯救自己。</p>
+		&nbsp;&nbsp;&nbsp;&nbsp;6日，一上课我就发现了不一样的东西。首先老师说不许用table，因为性能问题，而要用div+css，这让习惯用表格嵌套的我不是很习惯，不过我发现div+css确实很强大，完美取代table，布局上也可以适应移动端的要求。另外百度的老师讲的css的优先级，也非常重要，有让我顿悟的感觉。以上就是我最大的收获。</p>
+        <p class="STYLE6">&nbsp;&nbsp;&nbsp;&nbsp;我对本课程还是充满期待的，希望老师和助教能讲的细一点，因为javascript有时候不是很好理解,虽然js没什么语法。也是希望在介绍各种库如node.js时多给一点例程，使我们更好理解这些js库。当然我实际上还是属于一知半解型的，所以希望助教能够多多纠正错误。</p>
+<p class="STYLE6">&nbsp;&nbsp;&nbsp;&nbsp;虽然我还是个菜鸡，但是希望通过不断的练习和老师的讲解，来提升自己的web开发技巧。</p>
+<div>
+  <p>&nbsp;    </p>
+  <p>
+    <input type ="button" value="下一篇" id="btn" onclick="changeLog()" />
+  </p>
+</div>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>
