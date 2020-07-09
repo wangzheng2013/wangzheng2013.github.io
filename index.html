@@ -64,6 +64,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cas" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/09/cas/" class="article-date">
+  <time datetime="2020-07-09T15:28:19.035Z" itemprop="datePublished">2020-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/09/cas/">多线程之CAS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="不加锁的多线程实现"><a href="#不加锁的多线程实现" class="headerlink" title="不加锁的多线程实现"></a>不加锁的多线程实现</h3><p>重所周知，sny关键字可以帮助我们实现加锁，但是效率低。<br>通过atomicInteger下有一个自增操作，实现是用Compaer and swap 实现的，不用<br>加锁，效率较高。</p>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>三步走</p>
+<ol>
+<li>记录当前值为E</li>
+<li>计算结果值V</li>
+<li>比较E和新的当前值N是否一致</li>
+<li>如果不一致，说明有其他线程修改了，重复上述操作</li>
+<li>如果一致，可能没人改，直接赋值</li>
+<li>如果一致，也可能有人修改，可以手动加一个版本号区分</li>
+</ol>
+<h3 id="硬件实现"><a href="#硬件实现" class="headerlink" title="硬件实现"></a>硬件实现</h3><p>纵观JVM底层源码，是用C/C++实现的。底层汇编语言有 compare and exchange<br>这个命令。<br>这时记住要lock ， 然后compare and exchange</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/09/cas/" data-id="ckceyxy1j0000u0wk5hvw0r25" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/20/hexo/" class="article-date">
@@ -120,7 +167,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/06/20/hexo/" data-id="ckcexqncr0000sgwkcxby250c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/06/20/hexo/" data-id="ckceyxy1p0001u0wk8y67bb14" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,7 +195,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
     </div>
   </div>
 
@@ -159,6 +206,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/07/09/cas/">多线程之CAS</a>
+          </li>
         
           <li>
             <a href="/2020/06/20/hexo/">hexo搭建教程</a>
