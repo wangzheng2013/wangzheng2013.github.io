@@ -5,13 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>java序列化 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="1、应用场景java序列化主要是用于处理对象流的机制，主要用于2种情况：  把对象字节永久地保存到硬盘文件上 在网络上传输对象的字节序列 进程间传递对象  但是java的对象是保存在内存中的，而硬盘文件或者网络通常是二进制字节流，这之间的转换要如何完成呢？ 对象序列化的条件（实现Serializable接口）为了实现序列化，类必须实现 Serializable接口。 示例代码: 123456789">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java序列化">
+<meta property="og:url" content="http://yoursite.com/2020/07/10/Seriallizble/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1、应用场景java序列化主要是用于处理对象流的机制，主要用于2种情况：  把对象字节永久地保存到硬盘文件上 在网络上传输对象的字节序列 进程间传递对象  但是java的对象是保存在内存中的，而硬盘文件或者网络通常是二进制字节流，这之间的转换要如何完成呢？ 对象序列化的条件（实现Serializable接口）为了实现序列化，类必须实现 Serializable接口。 示例代码: 123456789">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-10T15:24:06.659Z">
+<meta property="article:modified_time" content="2020-07-10T15:45:01.898Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -62,9 +66,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Seriallizble" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Seriallizble" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/10/Seriallizble/" class="article-date">
   <time datetime="2020-07-10T15:24:06.659Z" itemprop="datePublished">2020-07-10</time>
@@ -77,8 +79,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/10/Seriallizble/">java序列化</a>
+    <h1 class="article-title" itemprop="name">
+      java序列化
     </h1>
   
 
@@ -140,124 +142,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-cas" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/09/cas/" class="article-date">
-  <time datetime="2020-07-09T15:28:19.035Z" itemprop="datePublished">2020-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/09/cas/">多线程之CAS</a>
-    </h1>
+    <a href="/2020/07/09/cas/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">多线程之CAS</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="不加锁的多线程实现"><a href="#不加锁的多线程实现" class="headerlink" title="不加锁的多线程实现"></a>不加锁的多线程实现</h3><p>重所周知，sny关键字可以帮助我们实现加锁，但是效率低。<br>通过atomicInteger下有一个自增操作，实现是用Compaer and swap 实现的，不用<br>加锁，效率较高。</p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>三步走</p>
-<ol>
-<li>记录当前值为E</li>
-<li>计算结果值V</li>
-<li>比较E和新的当前值N是否一致</li>
-<li>如果不一致，说明有其他线程修改了，重复上述操作</li>
-<li>如果一致，可能没人改，直接赋值</li>
-<li>如果一致，也可能有人修改，可以手动加一个版本号区分</li>
-</ol>
-<h3 id="硬件实现"><a href="#硬件实现" class="headerlink" title="硬件实现"></a>硬件实现</h3><p>纵观JVM底层源码，是用C/C++实现的。底层汇编语言有 compare and exchange<br>这个命令。<br>这时记住要lock ， 然后compare and exchange</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/09/cas/" data-id="ckcge6yjn0001b4wk1own4t7r" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/20/hexo/" class="article-date">
-  <time datetime="2020-06-19T17:53:39.657Z" itemprop="datePublished">2020-06-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/20/hexo/">hexo搭建教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="hexo简介"><a href="#hexo简介" class="headerlink" title="hexo简介"></a>hexo简介</h2><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用。<br>现在市面上的博客很多，如CSDN，博客园，简书等平台，可以直接在上面发表，用户交互做的好，写的文章百度也能搜索的到。缺点是比较不自由，会受到平台的各种限制和恶心的广告。</p>
-<p>而自己购买域名和服务器，搭建博客的成本实在是太高了，不光是说这些购买成本，单单是花力气去自己搭这么一个网站，还要定期的维护它，对于我们大多数人来说，实在是没有这样的精力和时间。</p>
-<p>那，直接在github page平台上托管博客，用它来搭建博客真的非常容易。</p>
-<h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2><h4 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h4><p>windows： 直接到nodejs中文网下载即可</p>
-<p>linux：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
-<p>安装完成后，可以输入以下命令检查：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<h4 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h4><p>建议使用cnpm，输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>同上可以使用cnpm -v 检查</p>
-<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>输入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="本地搭建"><a href="#本地搭建" class="headerlink" title="本地搭建"></a>本地搭建</h2><p>初始化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init myblog</span><br></pre></td></tr></table></figure>
-<p>这个myblog叫什么都行</p>
-<p>运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p>部署<br>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为<br>YourgithubName就是你的GitHub账户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;YourgithubName&#x2F;YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>然后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/06/20/hexo/" data-id="ckcge6yk00002b4wkalld88fx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
