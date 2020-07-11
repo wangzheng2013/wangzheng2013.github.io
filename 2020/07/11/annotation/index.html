@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>java注解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="定义日常开发中新建Java类，我们使用class、interface比较多，而注解和它们一样，也是一种类的类型，他是用的修饰符为 @interface 示例： 123public @interface MyTestAnnotation &amp;#123;&amp;#125;  元注解即注解的注解 元注解顾名思义我们可以理解为注解的注解，它是作用在注解中，方便我们使用注解实现想要的功能。元注解分别有@Retent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java注解">
+<meta property="og:url" content="http://yoursite.com/2020/07/11/annotation/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="定义日常开发中新建Java类，我们使用class、interface比较多，而注解和它们一样，也是一种类的类型，他是用的修饰符为 @interface 示例： 123public @interface MyTestAnnotation &amp;#123;&amp;#125;  元注解即注解的注解 元注解顾名思义我们可以理解为注解的注解，它是作用在注解中，方便我们使用注解实现想要的功能。元注解分别有@Retent">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-11T12:18:32.924Z">
+<meta property="article:modified_time" content="2020-07-11T12:18:49.702Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-annotation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/annotation/" class="article-date">
+  <time datetime="2020-07-11T12:18:32.924Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java注解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>日常开发中新建Java类，我们使用class、interface比较多，而注解和它们一样，也是一种类的类型，他是用的修饰符为 @interface</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public @interface MyTestAnnotation &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><p>即注解的注解</p>
+<p>元注解顾名思义我们可以理解为注解的注解，它是作用在注解中，方便我们使用注解实现想要的功能。元注解分别有@Retention、 @Target、 @Document、 @Inherited和@Repeatable（JDK1.8加入）五种。</p>
+<h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h4><ul>
+<li>Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源码（编译期），字节码（类加载）或者运行期（JVM中运行）。在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期</li>
+<li>@Retention(RetentionPolicy.SOURCE)，注解仅存在于源码中，在class字节码文件中不包含</li>
+<li>@Retention(RetentionPolicy.CLASS)， 默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得</li>
+<li>@Retention(RetentionPolicy.RUNTIME)， 注解会在class字节码文件中存在，在运行时可以通过反射获取到</li>
+<li>如果我们是自定义注解，则通过前面分析，我们自定义注解如果只存着源码中或者字节码文件中就无法发挥作用，而在运行期间能获取到注解才能实现我们目的，所以自定义注解中肯定是使用@Retention(RetentionPolicy.RUNTIME)</li>
+</ul>
+<h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h4><ul>
+<li>Target的英文意思是目标，这也很容易理解，使用@Target元注解表示我们的注解作用的范围就比较具体了，可以是类，方法，方法参数变量等，同样也是通过枚举类ElementType表达作用类型</li>
+<li>@Target(ElementType.TYPE) 作用接口、类、枚举、注解</li>
+<li>@Target(ElementType.FIELD) 作用属性字段、枚举的常量</li>
+<li>@Target(ElementType.METHOD) 作用方法</li>
+<li>@Target(ElementType.PARAMETER) 作用方法参数</li>
+<li>@Target(ElementType.CONSTRUCTOR) 作用构造函数</li>
+<li>@Target(ElementType.LOCAL_VARIABLE)作用局部变量</li>
+<li>@Target(ElementType.ANNOTATION_TYPE)作用于注解（@Retention注解中就使用该属性）</li>
+<li>@Target(ElementType.PACKAGE) 作用于包</li>
+<li>@Target(ElementType.TYPE_PARAMETER) 作用于类型泛型，即泛型方法、泛型类、泛型接口 （jdk1.8加入）</li>
+<li>@Target(ElementType.TYPE_USE) 类型使用.可以用于标注任意类型除了 class （jdk1.8加入）</li>
+<li>一般比较常用的是ElementType.TYPE类型</li>
+</ul>
+<h4 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h4><p>Document的英文意思是文档。它的作用是能够将注解中的元素包含到 Javadoc 中去。</p>
+<h4 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h4><p>Inherited的英文意思是继承，但是这个继承和我们平时理解的继承大同小异，一个被@Inherited注解了的注解修饰了一个父类，如果他的子类没有被其他注解修饰，则它的子类也继承了父类的注解。</p>
+<h4 id="Repeatable"><a href="#Repeatable" class="headerlink" title="@Repeatable"></a>@Repeatable</h4><p>Repeatable的英文意思是可重复的。顾名思义说明被这个元注解修饰的注解可以同时作用一个对象多次，但是每次作用注解又可以代表不同的含义。</p>
+<h2 id="JDK注解"><a href="#JDK注解" class="headerlink" title="JDK注解"></a>JDK注解</h2><p>作用在代码的注解是</p>
+<ul>
+<li>@Override - 检查该方法是否是重写方法。如果发现其父类，或者是引用的接口中并没有该方法时，会报编译错误。</li>
+<li>@Deprecated - 标记过时方法。如果使用该方法，会报编译警告。</li>
+<li>@SuppressWarnings - 指示编译器去忽略注解中声明的警告。</li>
+</ul>
+<h2 id="注解的作用"><a href="#注解的作用" class="headerlink" title="注解的作用"></a>注解的作用</h2><ul>
+<li>提供信息给编译器： 编译器可以利用注解来检测出错误或者警告信息，打印出日志。</li>
+<li>编译阶段时的处理： 软件工具可以用来利用注解信息来自动生成代码、文档或者做其它相应的自动处理。</li>
+<li>运行时处理： 某些注解可以在程序运行的时候接受代码的提取，自动做相应的操作。</li>
+<li>正如官方文档的那句话所说，注解能够提供元数据，转账例子中处理获取注解值的过程是我们开发者直接写的注解提取逻辑，处理提取和处理 Annotation 的代码统称为 APT（Annotation Processing Tool)。上面转账例子中的processAnnotationMoney方法就可以理解为APT工具类。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/annotation/" data-id="ckchr4fym0001t4wk66byb3ma" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/11/Thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java线程基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/11/annotation/">java注解</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/Thread/">java线程基础</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/jvm_port_is_used/">java web项目端口号被占用</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/template/">java的泛型</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/threadpool/">java的四种线程池</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

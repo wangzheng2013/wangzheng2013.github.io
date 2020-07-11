@@ -5,17 +5,17 @@
   
 
   
-  <title>多线程之CAS | Hexo</title>
+  <title>java web项目端口号被占用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不加锁的多线程实现重所周知，sny关键字可以帮助我们实现加锁，但是效率低。通过atomicInteger下有一个自增操作，实现是用Compaer and swap 实现的，不用加锁，效率较高。 CAS三步走  记录当前值为E 计算结果值V 比较E和新的当前值N是否一致 如果不一致，说明有其他线程修改了，重复上述操作 如果一致，可能没人改，直接赋值 如果一致，也可能有人修改，可以手动加一个版本号区分">
+  <meta name="description" content="步骤1、netstat -aon|findstr “端口号”，会显示占用的进程。 2、taskkill &#x2F;f &#x2F;pid “pid号”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多线程之CAS">
-<meta property="og:url" content="http://yoursite.com/2020/07/09/cas/index.html">
+<meta property="og:title" content="java web项目端口号被占用">
+<meta property="og:url" content="http://yoursite.com/2020/07/11/jvm_port_is_used/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="不加锁的多线程实现重所周知，sny关键字可以帮助我们实现加锁，但是效率低。通过atomicInteger下有一个自增操作，实现是用Compaer and swap 实现的，不用加锁，效率较高。 CAS三步走  记录当前值为E 计算结果值V 比较E和新的当前值N是否一致 如果不一致，说明有其他线程修改了，重复上述操作 如果一致，可能没人改，直接赋值 如果一致，也可能有人修改，可以手动加一个版本号区分">
+<meta property="og:description" content="步骤1、netstat -aon|findstr “端口号”，会显示占用的进程。 2、taskkill &#x2F;f &#x2F;pid “pid号”">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-09T15:28:19.035Z">
-<meta property="article:modified_time" content="2020-07-09T15:27:47.293Z">
+<meta property="article:published_time" content="2020-07-11T11:57:50.763Z">
+<meta property="article:modified_time" content="2020-07-11T11:58:11.558Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -66,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-cas" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-jvm_port_is_used" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/07/09/cas/" class="article-date">
-  <time datetime="2020-07-09T15:28:19.035Z" itemprop="datePublished">2020-07-09</time>
+    <a href="/2020/07/11/jvm_port_is_used/" class="article-date">
+  <time datetime="2020-07-11T11:57:50.763Z" itemprop="datePublished">2020-07-11</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      多线程之CAS
+      java web项目端口号被占用
     </h1>
   
 
@@ -88,22 +88,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="不加锁的多线程实现"><a href="#不加锁的多线程实现" class="headerlink" title="不加锁的多线程实现"></a>不加锁的多线程实现</h3><p>重所周知，sny关键字可以帮助我们实现加锁，但是效率低。<br>通过atomicInteger下有一个自增操作，实现是用Compaer and swap 实现的，不用<br>加锁，效率较高。</p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>三步走</p>
-<ol>
-<li>记录当前值为E</li>
-<li>计算结果值V</li>
-<li>比较E和新的当前值N是否一致</li>
-<li>如果不一致，说明有其他线程修改了，重复上述操作</li>
-<li>如果一致，可能没人改，直接赋值</li>
-<li>如果一致，也可能有人修改，可以手动加一个版本号区分</li>
-</ol>
-<h3 id="硬件实现"><a href="#硬件实现" class="headerlink" title="硬件实现"></a>硬件实现</h3><p>纵观JVM底层源码，是用C/C++实现的。底层汇编语言有 compare and exchange<br>这个命令。<br>这时记住要lock ， 然后compare and exchange</p>
+        <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1、netstat -aon|findstr “端口号”，会显示占用的进程。</p>
+<p>2、taskkill /f /pid “pid号”</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/09/cas/" data-id="ckchr4fyq0005t4wk78a04ykb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/11/jvm_port_is_used/" data-id="ckchr4fyp0003t4wkeve5hh1q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,19 +103,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/07/10/Seriallizble/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/11/Thread/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          java序列化
+          java线程基础
         
       </div>
     </a>
   
   
-    <a href="/2020/06/20/hexo/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/07/11/template/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">hexo搭建教程</div>
+      <div class="article-nav-title">java的泛型</div>
     </a>
   
 </nav>

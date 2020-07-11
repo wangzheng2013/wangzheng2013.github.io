@@ -64,6 +64,290 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-annotation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/annotation/" class="article-date">
+  <time datetime="2020-07-11T12:18:32.924Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/11/annotation/">java注解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>日常开发中新建Java类，我们使用class、interface比较多，而注解和它们一样，也是一种类的类型，他是用的修饰符为 @interface</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public @interface MyTestAnnotation &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><p>即注解的注解</p>
+<p>元注解顾名思义我们可以理解为注解的注解，它是作用在注解中，方便我们使用注解实现想要的功能。元注解分别有@Retention、 @Target、 @Document、 @Inherited和@Repeatable（JDK1.8加入）五种。</p>
+<h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h4><ul>
+<li>Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源码（编译期），字节码（类加载）或者运行期（JVM中运行）。在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期</li>
+<li>@Retention(RetentionPolicy.SOURCE)，注解仅存在于源码中，在class字节码文件中不包含</li>
+<li>@Retention(RetentionPolicy.CLASS)， 默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得</li>
+<li>@Retention(RetentionPolicy.RUNTIME)， 注解会在class字节码文件中存在，在运行时可以通过反射获取到</li>
+<li>如果我们是自定义注解，则通过前面分析，我们自定义注解如果只存着源码中或者字节码文件中就无法发挥作用，而在运行期间能获取到注解才能实现我们目的，所以自定义注解中肯定是使用@Retention(RetentionPolicy.RUNTIME)</li>
+</ul>
+<h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h4><ul>
+<li>Target的英文意思是目标，这也很容易理解，使用@Target元注解表示我们的注解作用的范围就比较具体了，可以是类，方法，方法参数变量等，同样也是通过枚举类ElementType表达作用类型</li>
+<li>@Target(ElementType.TYPE) 作用接口、类、枚举、注解</li>
+<li>@Target(ElementType.FIELD) 作用属性字段、枚举的常量</li>
+<li>@Target(ElementType.METHOD) 作用方法</li>
+<li>@Target(ElementType.PARAMETER) 作用方法参数</li>
+<li>@Target(ElementType.CONSTRUCTOR) 作用构造函数</li>
+<li>@Target(ElementType.LOCAL_VARIABLE)作用局部变量</li>
+<li>@Target(ElementType.ANNOTATION_TYPE)作用于注解（@Retention注解中就使用该属性）</li>
+<li>@Target(ElementType.PACKAGE) 作用于包</li>
+<li>@Target(ElementType.TYPE_PARAMETER) 作用于类型泛型，即泛型方法、泛型类、泛型接口 （jdk1.8加入）</li>
+<li>@Target(ElementType.TYPE_USE) 类型使用.可以用于标注任意类型除了 class （jdk1.8加入）</li>
+<li>一般比较常用的是ElementType.TYPE类型</li>
+</ul>
+<h4 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h4><p>Document的英文意思是文档。它的作用是能够将注解中的元素包含到 Javadoc 中去。</p>
+<h4 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h4><p>Inherited的英文意思是继承，但是这个继承和我们平时理解的继承大同小异，一个被@Inherited注解了的注解修饰了一个父类，如果他的子类没有被其他注解修饰，则它的子类也继承了父类的注解。</p>
+<h4 id="Repeatable"><a href="#Repeatable" class="headerlink" title="@Repeatable"></a>@Repeatable</h4><p>Repeatable的英文意思是可重复的。顾名思义说明被这个元注解修饰的注解可以同时作用一个对象多次，但是每次作用注解又可以代表不同的含义。</p>
+<h2 id="JDK注解"><a href="#JDK注解" class="headerlink" title="JDK注解"></a>JDK注解</h2><p>作用在代码的注解是</p>
+<ul>
+<li>@Override - 检查该方法是否是重写方法。如果发现其父类，或者是引用的接口中并没有该方法时，会报编译错误。</li>
+<li>@Deprecated - 标记过时方法。如果使用该方法，会报编译警告。</li>
+<li>@SuppressWarnings - 指示编译器去忽略注解中声明的警告。</li>
+</ul>
+<h2 id="注解的作用"><a href="#注解的作用" class="headerlink" title="注解的作用"></a>注解的作用</h2><ul>
+<li>提供信息给编译器： 编译器可以利用注解来检测出错误或者警告信息，打印出日志。</li>
+<li>编译阶段时的处理： 软件工具可以用来利用注解信息来自动生成代码、文档或者做其它相应的自动处理。</li>
+<li>运行时处理： 某些注解可以在程序运行的时候接受代码的提取，自动做相应的操作。</li>
+<li>正如官方文档的那句话所说，注解能够提供元数据，转账例子中处理获取注解值的过程是我们开发者直接写的注解提取逻辑，处理提取和处理 Annotation 的代码统称为 APT（Annotation Processing Tool)。上面转账例子中的processAnnotationMoney方法就可以理解为APT工具类。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/annotation/" data-id="ckchr4fym0001t4wk66byb3ma" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Thread" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/Thread/" class="article-date">
+  <time datetime="2020-07-11T12:04:18.106Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/11/Thread/">java线程基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h2><p>1、继承父类 Thread</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadDemo extends Thread&#123;</span><br><span class="line">     @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;&#x3D;20;i++)&#123;</span><br><span class="line">            System.out.println(i+&quot;.你好,来自线程&quot;+</span><br><span class="line">        Thread.currentThread().getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[]args)&#123;</span><br><span class="line">    ThreadDemo t1&#x3D;new ThreadDemo();</span><br><span class="line">    t1.start();&#x2F;&#x2F;线程的启动方法</span><br><span class="line">    ThreadDemo t2&#x3D;new ThreadDemo();</span><br><span class="line">    t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、实现Runnable接口</p>
+<ol>
+<li>实现run()方法；</li>
+<li>编写线程执行体；</li>
+<li>创建线程对象；</li>
+<li>调用start()方法启动线程。</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class RunnableDemo implements Runnable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;&#x3D;100;i++)&#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;--&gt;&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        RunnableDemo rd1&#x3D;new RunnableDemo();</span><br><span class="line">        Thread t1&#x3D;new Thread(rd1);</span><br><span class="line">        t1.start();</span><br><span class="line">        RunnableDemo rd2&#x3D;new RunnableDemo();</span><br><span class="line">        Thread t2&#x3D;new Thread(rd2);</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h2><p>线程有几种状态：</p>
+<p>  a、新建状态(new)</p>
+<p>  b、就绪状态(Runnable)</p>
+<p>  c、运行状态(Running)</p>
+<p>  d、阻塞状态(Blocked)</p>
+<p>  e、死亡状态(Dead)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/Thread/" data-id="ckchr4fyg0000t4wk4w3efqo5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-jvm_port_is_used" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/jvm_port_is_used/" class="article-date">
+  <time datetime="2020-07-11T11:57:50.763Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/11/jvm_port_is_used/">java web项目端口号被占用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1、netstat -aon|findstr “端口号”，会显示占用的进程。</p>
+<p>2、taskkill /f /pid “pid号”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/jvm_port_is_used/" data-id="ckchr4fyp0003t4wkeve5hh1q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-template" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/template/" class="article-date">
+  <time datetime="2020-07-11T11:54:31.920Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/11/template/">java的泛型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>泛型是C++中模板的意思，即不预先指定参数类型，而是运行时才会获取。毫无疑问，这样有效帮助了程序员的代码编写工作，但是肯定有可能带来运行时错误。</p>
+<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><p>泛型类的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class 类名称 &lt;泛型标识：可以随便写任意标识号，标识指定的泛型的类型&gt;&#123;</span><br><span class="line">  private 泛型标识 &#x2F;*（成员变量类型）*&#x2F; var; </span><br><span class="line">  .....</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个实际例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型</span><br><span class="line">&#x2F;&#x2F;在实例化泛型类时，必须指定T的具体类型</span><br><span class="line">public class Generic&lt;T&gt;&#123; </span><br><span class="line">    &#x2F;&#x2F;key这个成员变量的类型为T,T的类型由外部指定  </span><br><span class="line">    private T key;</span><br><span class="line"></span><br><span class="line">    public Generic(T key) &#123; &#x2F;&#x2F;泛型构造方法形参key的类型也为T，T的类型由外部指定</span><br><span class="line">        this.key &#x3D; key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T getKey()&#123; &#x2F;&#x2F;泛型方法getKey的返回值类型为T，T的类型由外部指定</span><br><span class="line">        return key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><p>类似泛型类，有如下定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义一个泛型接口</span><br><span class="line">public interface Generator&lt;T&gt; &#123;</span><br><span class="line">    public T next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 未传入泛型实参时，与泛型类的定义相同，在声明类的时候，需将泛型的声明也一起加到类中</span><br><span class="line"> * 即：class FruitGenerator&lt;T&gt; implements Generator&lt;T&gt;&#123;</span><br><span class="line"> * 如果不声明泛型，如：class FruitGenerator implements Generator&lt;T&gt;，编译器会报错：&quot;Unknown class&quot;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class FruitGenerator&lt;T&gt; implements Generator&lt;T&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public T next() &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 传入泛型实参时：</span><br><span class="line"> * 定义一个生产器实现这个接口,虽然我们只创建了一个泛型接口Generator&lt;T&gt;</span><br><span class="line"> * 但是我们可以为T传入无数个实参，形成无数种类型的Generator接口。</span><br><span class="line"> * 在实现类实现泛型接口时，如已将泛型类型传入实参类型，则所有使用泛型的地方都要替换成传入的实参类型</span><br><span class="line"> * 即：Generator&lt;T&gt;，public T next();中的的T都要替换成传入的String类型。</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class FruitGenerator implements Generator&lt;String&gt; &#123;</span><br><span class="line"></span><br><span class="line">    private String[] fruits &#x3D; new String[]&#123;&quot;Apple&quot;, &quot;Banana&quot;, &quot;Pear&quot;&#125;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String next() &#123;</span><br><span class="line">        Random rand &#x3D; new Random();</span><br><span class="line">        return fruits[rand.nextInt(3)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 泛型方法的基本介绍</span><br><span class="line"> * @param tClass 传入的泛型实参</span><br><span class="line"> * @return T 返回值为T类型</span><br><span class="line"> * 说明：</span><br><span class="line"> *     1）public 与 返回值中间&lt;T&gt;非常重要，可以理解为声明此方法为泛型方法。</span><br><span class="line"> *     2）只有声明了&lt;T&gt;的方法才是泛型方法，泛型类中的使用了泛型的成员方法并不是泛型方法。</span><br><span class="line"> *     3）&lt;T&gt;表明该方法将使用泛型类型T，此时才可以在方法中使用泛型类型T。</span><br><span class="line"> *     4）与泛型类的定义一样，此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型。</span><br><span class="line"> *&#x2F;</span><br><span class="line">public &lt;T&gt; T genericMethod(Class&lt;T&gt; tClass)throws InstantiationException ,</span><br><span class="line">  IllegalAccessException&#123;</span><br><span class="line">        T instance &#x3D; tClass.newInstance();</span><br><span class="line">        return instance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型上下界"><a href="#泛型上下界" class="headerlink" title="泛型上下界"></a>泛型上下界</h2><p>在使用泛型的时候，我们还可以为传入的泛型类型实参进行上下边界的限制，如：类型实参只准传入某种类型的父类或某种类型的子类。</p>
+<p>为泛型添加上边界，即传入的类型实参必须是指定类型的子类型</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void showKeyValue1(Generic&lt;? extends Number&gt; obj)&#123;</span><br><span class="line">    Log.d(&quot;泛型测试&quot;,&quot;key value is &quot; + obj.getKey());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/template/" data-id="ckchr4fys0007t4wk1ddjd96e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-threadpool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/threadpool/" class="article-date">
+  <time datetime="2020-07-11T09:02:35.839Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/11/threadpool/">java的四种线程池</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h2><p>底层：返回ThreadPoolExecutor实例，corePoolSize为0；maximumPoolSize为Integer.MAX_VALUE；keepAliveTime为60L；unit为TimeUnit.SECONDS；workQueue为SynchronousQueue(同步队列)</p>
+<p>通俗：当有新任务到来，则插入到SynchronousQueue中，由于SynchronousQueue是同步队列，因此会在池中寻找可用线程来执行，若有可以线程则执行，若没有可用线程则创建一个线程来执行该任务；若池中线程空闲时间超过指定大小，则该线程会被销毁。</p>
+<p>适用：执行很多短期异步的小程序或者负载较轻的服务器</p>
+<h2 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h2><p>底层：返回ThreadPoolExecutor实例，接收参数为所设定线程数量nThread，corePoolSize为nThread，maximumPoolSize为nThread；keepAliveTime为0L(不限时)；unit为：TimeUnit.MILLISECONDS；WorkQueue为：new LinkedBlockingQueue<Runnable>() 无解阻塞队列</p>
+<p>通俗：创建可容纳固定数量线程的池子，每隔线程的存活时间是无限的，当池子满了就不在添加线程了；如果池中的所有线程均在繁忙状态，对于新任务会进入阻塞队列中(无界的阻塞队列)</p>
+<p>适用：执行长期的任务，性能好很多</p>
+<h2 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor:"></a>newSingleThreadExecutor:</h2><p>底层：FinalizableDelegatedExecutorService包装的ThreadPoolExecutor实例，corePoolSize为1；maximumPoolSize为1；keepAliveTime为0L；unit为：TimeUnit.MILLISECONDS；workQueue为：new LinkedBlockingQueue<Runnable>()</p>
+<p>无解阻塞队列<br>通俗：创建只有一个线程的线程池，且线程的存活时间是无限的；当该线程正繁忙时，对于新任务会进入阻塞队列中(无界的阻塞队列)<br>适用：一个任务一个任务执行的场景</p>
+<h2 id="NewScheduledThreadPool"><a href="#NewScheduledThreadPool" class="headerlink" title="NewScheduledThreadPool:"></a>NewScheduledThreadPool:</h2><p>底层：创建ScheduledThreadPoolExecutor实例，corePoolSize为传递来的参数，maximumPoolSize为Integer.MAX_VALUE；keepAliveTime为0；unit为：TimeUnit.NANOSECONDS；workQueue为：new DelayedWorkQueue() 一个按超时时间升序排序的队列<br>通俗：创建一个固定大小的线程池，线程池内线程存活时间无限制，线程池可以支持定时及周期性任务执行，如果所有线程均处于繁忙状态，对于新任务会进入DelayedWorkQueue队列中，这是一种按照超时时间排序的队列结构<br>适用：周期性执行任务的场景</p>
+<h2 id="线程池任务执行流程："><a href="#线程池任务执行流程：" class="headerlink" title="线程池任务执行流程："></a>线程池任务执行流程：</h2><ol>
+<li>当线程池小于corePoolSize时，新提交任务将创建一个新线程执行任务，即使此时线程池中存在空闲线程。</li>
+<li>当线程池达到corePoolSize时，新提交任务将被放入workQueue中，等待线程池中任务调度执行</li>
+<li>当workQueue已满，且maximumPoolSize&gt;corePoolSize时，新提交任务会创建新线程执行任务</li>
+<li>当提交任务数超过maximumPoolSize时，新提交任务由RejectedExecutionHandler处理</li>
+<li>当线程池中超过corePoolSize线程，空闲时间达到keepAliveTime时，关闭空闲线程</li>
+<li>当设置allowCoreThreadTimeOut(true)时，线程池中corePoolSize线程空闲时间达到keepAliveTime也将关闭</li>
+</ol>
+<p>备注：</p>
+<p>一般如果线程池任务队列采用LinkedBlockingQueue队列的话，那么不会拒绝任何任务（因为队列大小没有限制），这种情况下，ThreadPoolExecutor最多仅会按照最小线程数来创建线程，也就是说线程池大小被忽略了。</p>
+<p>如果线程池任务队列采用ArrayBlockingQueue队列的话，那么ThreadPoolExecutor将会采取一个非常负责的算法，比如假定线程池的最小线程数为4，最大为8所用的ArrayBlockingQueue最大为10。随着任务到达并被放到队列中，线程池中最多运行4个线程（即最小线程数）。即使队列完全填满，也就是说有10个处于等待状态的任务，ThreadPoolExecutor也只会利用4个线程。如果队列已满，而又有新任务进来，此时才会启动一个新线程，这里不会因为队列已满而拒接该任务，相反会启动一个新线程。新线程会运行队列中的第一个任务，为新来的任务腾出空间。</p>
+<p>这个算法背后的理念是：该池大部分时间仅使用核心线程（4个），即使有适量的任务在队列中等待运行。这时线程池就可以用作节流阀。如果挤压的请求变得非常多，这时该池就会尝试运行更多的线程来清理；这时第二个节流阀—最大线程数就起作用了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/threadpool/" data-id="ckchr4fyr0006t4wkaltx9f98" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Seriallizble" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/10/Seriallizble/" class="article-date">
@@ -134,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/10/Seriallizble/" data-id="ckcge6yji0000b4wkhceo49yh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/10/Seriallizble/" data-id="ckchr4fyq0004t4wk4v5cgc6r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -181,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/09/cas/" data-id="ckcge6yjn0001b4wk1own4t7r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/07/09/cas/" data-id="ckchr4fyq0005t4wk78a04ykb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -247,7 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/06/20/hexo/" data-id="ckcge6yk00002b4wkalld88fx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/06/20/hexo/" data-id="ckchr4fyo0002t4wk51hc6axw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,15 +572,23 @@
       <ul>
         
           <li>
-            <a href="/2020/07/10/Seriallizble/">java序列化</a>
+            <a href="/2020/07/11/annotation/">java注解</a>
           </li>
         
           <li>
-            <a href="/2020/07/09/cas/">多线程之CAS</a>
+            <a href="/2020/07/11/Thread/">java线程基础</a>
           </li>
         
           <li>
-            <a href="/2020/06/20/hexo/">hexo搭建教程</a>
+            <a href="/2020/07/11/jvm_port_is_used/">java web项目端口号被占用</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/template/">java的泛型</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/threadpool/">java的四种线程池</a>
           </li>
         
       </ul>

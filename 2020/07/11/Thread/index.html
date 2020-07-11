@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>java线程基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="线程的创建1、继承父类 Thread 123456789101112131415public class ThreadDemo extends Thread&amp;#123;     @Override    public void run() &amp;#123;        for(int i&#x3D;0;i&lt;&#x3D;20;i++)&amp;#123;            System.out.pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java线程基础">
+<meta property="og:url" content="http://yoursite.com/2020/07/11/Thread/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="线程的创建1、继承父类 Thread 123456789101112131415public class ThreadDemo extends Thread&amp;#123;     @Override    public void run() &amp;#123;        for(int i&#x3D;0;i&lt;&#x3D;20;i++)&amp;#123;            System.out.pr">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-11T12:04:18.106Z">
+<meta property="article:modified_time" content="2020-07-11T12:04:30.203Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Thread" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/11/Thread/" class="article-date">
+  <time datetime="2020-07-11T12:04:18.106Z" itemprop="datePublished">2020-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java线程基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h2><p>1、继承父类 Thread</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class ThreadDemo extends Thread&#123;</span><br><span class="line">     @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;&#x3D;20;i++)&#123;</span><br><span class="line">            System.out.println(i+&quot;.你好,来自线程&quot;+</span><br><span class="line">        Thread.currentThread().getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[]args)&#123;</span><br><span class="line">    ThreadDemo t1&#x3D;new ThreadDemo();</span><br><span class="line">    t1.start();&#x2F;&#x2F;线程的启动方法</span><br><span class="line">    ThreadDemo t2&#x3D;new ThreadDemo();</span><br><span class="line">    t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、实现Runnable接口</p>
+<ol>
+<li>实现run()方法；</li>
+<li>编写线程执行体；</li>
+<li>创建线程对象；</li>
+<li>调用start()方法启动线程。</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class RunnableDemo implements Runnable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        for(int i&#x3D;0;i&lt;&#x3D;100;i++)&#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;--&gt;&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        RunnableDemo rd1&#x3D;new RunnableDemo();</span><br><span class="line">        Thread t1&#x3D;new Thread(rd1);</span><br><span class="line">        t1.start();</span><br><span class="line">        RunnableDemo rd2&#x3D;new RunnableDemo();</span><br><span class="line">        Thread t2&#x3D;new Thread(rd2);</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h2><p>线程有几种状态：</p>
+<p>  a、新建状态(new)</p>
+<p>  b、就绪状态(Runnable)</p>
+<p>  c、运行状态(Running)</p>
+<p>  d、阻塞状态(Blocked)</p>
+<p>  e、死亡状态(Dead)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/11/Thread/" data-id="ckchr4fyg0000t4wk4w3efqo5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/11/annotation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java注解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/11/jvm_port_is_used/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java web项目端口号被占用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/11/annotation/">java注解</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/Thread/">java线程基础</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/jvm_port_is_used/">java web项目端口号被占用</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/template/">java的泛型</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/11/threadpool/">java的四种线程池</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
